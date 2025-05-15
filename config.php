@@ -1,7 +1,7 @@
 <?php
 
 // معلومات الاتصال بالبوت
-define('BOT_TOKEN', '7623523587:AAEkmroKyKMZTBoIkUoIHifxSu9adtIn5Rw');
+define('BOT_TOKEN', '7623523587:AAEkmroKyKMZTBolkUolHifxSu9adtln5Rw');
 define('API_URL', 'https://api.telegram.org/bot' . BOT_TOKEN . '/');
 define('ADMIN_ID', 7553454385); // ← معرف الأدمن تم إدخاله بنجاح
 
