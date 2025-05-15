@@ -10,4 +10,5 @@ if ($response && $response['ok']) {
     echo "❌ فشل في الإرسال.";
     print_r($response);
 }
+var_dump($response);
 ?>
