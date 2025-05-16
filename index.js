@@ -2,8 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import fetch from 'node-fetch';
-const { Telegraf } = require('telegraf');
-const fetch = require('node-fetch');
+import { Telegraf } from 'telegraf';
 const crypto = require('crypto');
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
