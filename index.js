@@ -56,7 +56,7 @@ async function checkMarketAndSend() {
     const trades = await getTradesForMarket(symbol);
     for (const trade of trades) {
       const totalValue = trade.price * trade.quantity;
-      if (totalValue >= 1000) { // شرط الصفقة الكبيرة
+      if (totalValue >= 200) { // شرط الصفقة الكبيرة
         const sideText = trade.side === 'buy' ? 'شراء' : 'بيع';
         const msg = 
           `📊 صفقة ${sideText} على ${symbol}:\n` +
