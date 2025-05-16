@@ -27,7 +27,7 @@ async function getAllMarkets() {
   return [];
 }
 
-// دالة للحصول على الصفقات السوقية (مبسطة، ممكن تحتاج تعديل حسب API OKX)
+// دالة للحصول على الصفقات السوقية (مبسطة)
 async function getTradesForMarket(symbol) {
   const url = `${process.env.OKX_BASE_URL}/api/v5/market/trades?instId=${symbol}`;
   const res = await fetch(url);
@@ -56,20 +56,16 @@ async function checkMarketAndSend() {
     const trades = await getTradesForMarket(symbol);
     for (const trade of trades) {
       const totalValue = trade.price * trade.quantity;
-      if (totalValue >= 200) { // شرط الصفقة الكبيرة
+      if (totalValue >= 1000) { // شرط الصفقة الكبيرة
         const sideText = trade.side === 'buy' ? 'شراء' : 'بيع';
-        const msg = 
-          `📊 صفقة ${sideText} على ${symbol}:\n` +
-          `الكمية: ${trade.quantity}\n` +
-          `السعر: ${trade.price.toFixed(8)}\n` +
-          `القيمة: ${totalValue.toFixed(2)} دولار`;
+        const msg = `📊 صفقة ${sideText} على ${symbol}:\nالكمية: ${trade.quantity}\nالسعر: ${trade.price}\nالقيمة: ${totalValue.toFixed(2)} دولار`;
         await sendTelegramMessage(msg);
       }
     }
   }
 }
 
-// أمر /start (اختياري)
+// أمر /start
 bot.start((ctx) => ctx.reply('أهلاً! أرسل "s" لتفعيل الإرسال أو "p" لإيقافه.'));
 
 // استقبال رسائل المستخدم وتشغيل / إيقاف الإرسال
@@ -93,11 +89,16 @@ bot.on('text', (ctx) => {
   }
 });
 
-// تشغيل البوت
-bot.launch();
+// تشغيل البوت مع polling (الافتراضي)
+bot.launch({
+  polling: true,
+});
+
+// التعامل مع إغلاق التطبيق بشكل نظيف
+process.once('SIGINT', () => bot.stop('SIGINT'));
+process.once('SIGTERM', () => bot.stop('SIGTERM'));
 
 console.log('🚀 البوت شغال...');
-
 setInterval(() => {
   checkMarketAndSend().catch(console.error);
 }, 30000);  // كل 30 ثانية يفحص الأسواق ويرسل الصفقات
