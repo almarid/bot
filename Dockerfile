@@ -1,5 +1,5 @@
 FROM php:8.1-apache
-WORKDIR /var/www/html
+WORKDIR /var/www/php
 COPY . .
 RUN docker-php-ext-install pdo pdo_mysql
 EXPOSE 80
