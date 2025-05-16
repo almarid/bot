@@ -30,9 +30,22 @@ function sendTelegramMessage($message) {
 }
 
 // دوال API OKX الخاصة بك هنا (createHeaders, getAllMarkets, checkMarket, إلخ)
-// ... (ضع هنا كامل دوال API التي تستخدمها من كودك السابق)
+// ضع هنا دوالك الخاصة بالتعامل مع OKX
 
-// مثال مبسط: دالة لمراقبة السوق وإرسال الصفقات الكبرى فقط إذا تم التفعيل
+// دالة مثال: استبدلها بدوالك الحقيقية
+function getAllMarkets() {
+    // مثال بيانات ثابتة
+    return ['BTC-USDT', 'ETH-USDT'];
+}
+
+function getTradesForMarket($symbol) {
+    // مثال بيانات صفقات
+    return [
+        ['price' => 30000, 'quantity' => 0.05, 'side' => 'buy'],
+        ['price' => 30010, 'quantity' => 0.03, 'side' => 'sell'],
+    ];
+}
+
 function checkMarketAndSend() {
     $state = getState();
     if (!$state['running']) {
@@ -40,7 +53,6 @@ function checkMarketAndSend() {
         return;
     }
 
-    // مثال: جلب الأسواق (ضع دوالك الحقيقية هنا)
     $markets = getAllMarkets();
 
     if (empty($markets)) {
@@ -49,8 +61,6 @@ function checkMarketAndSend() {
     }
 
     foreach ($markets as $symbol) {
-        // فحص الصفقات لكل سوق
-        // استبدلها بدالة checkMarket أو دالة تحليل خاصة بك
         $trades = getTradesForMarket($symbol);
 
         foreach ($trades as $trade) {
@@ -64,7 +74,6 @@ function checkMarketAndSend() {
     }
 }
 
-// هنا تستدعي الدالة في حلقة لا نهائية أو جدولة cron job
 while (true) {
     checkMarketAndSend();
     sleep(30);
