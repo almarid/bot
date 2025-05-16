@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 php:8.1-cli
+FROM php:8.1-cli
 
 WORKDIR /app
 
