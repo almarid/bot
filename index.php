@@ -22,6 +22,7 @@ function sendTelegramMessage($chat_id, $text) {
     @file_get_contents($url . "?" . http_build_query($data));
 }
 
+// استقبال بيانات الويب هوك
 $content = file_get_contents("php://input");
 $update = json_decode($content, true);
 
