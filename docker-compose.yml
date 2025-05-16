@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  telegram-bot:
+    container_name: telegram-bot
+    build: .
+    ports:
+      - "3000:3000"  # تأكد أن هذا المنفذ هو المستخدم في index.js إذا كنت تستخدم Webhook
+    env_file:
+      - .env
+    restart: always
