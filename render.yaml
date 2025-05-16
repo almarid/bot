@@ -1,0 +1,6 @@
+services:
+  - type: worker
+    name: your-service-name
+    runtime: node
+    buildCommand: bundle install
+    startCommand: bundle exec sidekiq
