@@ -1,5 +1,6 @@
 <?php
 require_once 'config.php';
+require_once 'okx_api.php';
 
 define('STATE_FILE', __DIR__ . '/state.json');
 
@@ -27,23 +28,6 @@ function sendTelegramMessage($message) {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_exec($ch);
     curl_close($ch);
-}
-
-// دوال API OKX الخاصة بك هنا (createHeaders, getAllMarkets, checkMarket, إلخ)
-// ضع هنا دوالك الخاصة بالتعامل مع OKX
-
-// دالة مثال: استبدلها بدوالك الحقيقية
-function getAllMarkets() {
-    // مثال بيانات ثابتة
-    return ['BTC-USDT', 'ETH-USDT'];
-}
-
-function getTradesForMarket($symbol) {
-    // مثال بيانات صفقات
-    return [
-        ['price' => 30000, 'quantity' => 0.05, 'side' => 'buy'],
-        ['price' => 30010, 'quantity' => 0.03, 'side' => 'sell'],
-    ];
 }
 
 function checkMarketAndSend() {
