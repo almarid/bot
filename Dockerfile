@@ -1,5 +1,9 @@
-FROM --platform=linux/amd64 php:8.1-apache
-WORKDIR /var/www/html
+FROM --platform=linux/amd64 php:8.1-cli
+
+WORKDIR /app
+
 COPY . .
-EXPOSE 80
-CMD ["apache2-foreground"]
+
+CMD ["php", "bot.php"]
+
+
