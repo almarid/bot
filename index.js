@@ -1,4 +1,7 @@
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
+
+import fetch from 'node-fetch';
 const { Telegraf } = require('telegraf');
 const fetch = require('node-fetch');
 const crypto = require('crypto');
